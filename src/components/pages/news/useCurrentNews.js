@@ -3,8 +3,11 @@ import { useRedux } from '~/helpers';
 
 function useCurrentNews(currentPage){
     const allNews = useRedux("news.data", []),
-    startElement = config.news.limit * currentPage + 1;
+        startElement = config.news.limit * currentPage + 1;
     
+    if(!allNews.length){
+        return null
+    }
     return {
         first: allNews[0],
         data: allNews.slice(startElement, startElement + config.news.limit),

@@ -5,6 +5,7 @@ import { useBookmarks } from '~/components/utils/useBookmarks';
 import { Pagination } from '~/components/utils/pagination';
 import { equals, not } from 'ramda';
 import { Helmet } from 'react-helmet';
+import { Loader } from '../utils/Loader';
 
 function News(){
     const [currentPage, setCurrentPage] = useState(0),
@@ -13,6 +14,10 @@ function News(){
           
     let currentNews = useCurrentNews(currentPage); // I made a hook to get all info I need for this page
     
+    console.log(currentNews)
+    if(!currentNews?.data){
+        return <Loader />
+    }
     return (
         <div className="news-container">
             <Helmet>
