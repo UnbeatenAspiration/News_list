@@ -1,0 +1,57 @@
+.toast{
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    animation: slideInOut 5s ease-in-out;
+    background: #535353;
+    padding: 20px;
+    min-width: 280px;
+    color: #fff;
+    font-size: 1.3em;
+    &__timeline{
+        position: absolute;
+        animation: hideLine 5s linear;
+        bottom: 0;
+        height: 2px;
+        background: #fff;
+        width: 100%;
+        left: 0;
+        transform-origin: left;
+    }
+    &__close_btn {
+        position: absolute;
+        top: 11px;
+        right: 5px;
+        & > div{
+            width: 13px;
+            height: 3px;
+            border-radius: 3px;
+            background: #fff;
+            transform: rotate(45deg);
+            &:last-child{
+                transform: rotate(-45deg);
+                position: relative;
+                top: -3px;
+            }
+        }
+    }
+}
+
+@keyframes slideInOut{
+    from,to{
+        transform: translateX(120%);
+    }
+    10%, 80%{
+        transform: translateX(0%);
+    }
+}
+
+@keyframes hideLine{
+    from{
+        transform: scaleX(1);   
+    }
+    to{
+        transform: scaleX(0);
+        
+    }
+}

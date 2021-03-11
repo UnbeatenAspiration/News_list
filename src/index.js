@@ -1,17 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import React, {Suspense} from 'react';
+import {render, hydrate} from 'react-dom';
+import {App} from './App';
 import reportWebVitals from './reportWebVitals';
+import { Loader } from './components/utils/Loader';
+import "./css/main.scss";
+import ErrorBoundary from './components/ErrorBoundary';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function Root(){
+    return (
+        <Suspense fallback={<Loader />} maxDuration={5000}> {/* To accept dynamic components */}
+            <React.StrictMode> {/* To enable strict mode */}
+              <ErrorBoundary>
+                <App />
+              </ErrorBoundary>
+            </React.StrictMode>
+        </Suspense>
+    )
+}
+const rootElement = document.getElementById('root');
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+if (rootElement.hasChildNodes()) { // Hydrate to HTML if it is Crawler, render if not
+    hydrate(<Root />, rootElement);
+} else {
+    render(<Root />, rootElement);
+}
+
+reportWebVitals(); //to start measuring performance in console or send it

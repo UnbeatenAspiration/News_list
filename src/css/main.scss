@@ -1,0 +1,89 @@
+$back-color: #242525;
+
+#modal-root{
+    z-index: 2;
+    position: relative;
+}
+*{
+    box-sizing: border-box;
+}
+.hidden{
+    display: none;
+    visibility: hidden;
+}
+body{
+    background-color: $back-color;
+    overflow-x: hidden;
+}
+main{
+    max-width: 1920px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 19px 34px;
+}
+
+.plain-container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    & > * {
+        display: flex;
+        flex-basis: calc(25% - 12px);
+        &:nth-child(n + 5){
+            margin-top: 22px;
+        }
+    }
+}
+
+.not-found{
+    color: #fff;
+    margin-bottom: 20px;
+    img{
+        max-width: 50%;
+    }   
+}
+
+@media only screen and (max-width: 1220px){ // I'm sorry for it. I can't find a better way :)
+    .plain-container > div{
+        &:nth-child(8){
+            margin-left: 18px;
+        }
+        &:nth-child(n - 8){
+            flex: 1 1 calc(33.3% - 12px);
+        }
+        &:nth-child(n + 4){
+            margin-top: 22px;
+        }
+        &:nth-child(2),
+        &:nth-child(5)
+        {
+            margin-left: 18px;
+            margin-right: 18px;
+        }
+    }
+}
+@media only screen and (max-width: 920px){
+    .plain-container > div{
+        &:nth-child(n){
+            margin: 0;
+            flex-basis: calc(50% - 12px);
+        }
+        &:nth-child(n + 3){
+            margin-top: 22px;
+        }
+        &:nth-child(even){
+            margin-left: 18px;
+        }
+    }
+}
+@media screen and (max-width: 625px){
+    .plain-container > div{
+        &:nth-child(n){
+            margin: 0;
+            flex-basis: 100%;
+            + div{
+                margin-top: 22px;
+            }   
+        }
+    }
+}
